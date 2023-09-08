@@ -1,0 +1,34 @@
+function validateAndExtractPhoneNumber($phoneNumber)
+{
+    // Remove any non-digit characters from the phone number
+    $phoneNumber = preg_replace('/[^0-9]/', '', $phoneNumber);
+
+    // Validate the phone number format
+    if (!preg_match('/^(0|\+?234)(\d{10})$/', $phoneNumber)) {
+        return false; // Invalid phone number format
+    }
+
+    // Extract the last 10 digits of the phone number
+    $last10Digits = substr($phoneNumber, -10);
+
+    return $last10Digits;
+}
+In this function, we first remove any non-digit characters from the supplied phone number using preg_replace() with the regular expression '/[^0-9]/'. This ensures that we are left with only the digits.
+
+Next, we validate the phone number format using preg_match() and the regular expression /^(0|\+?234)(\d{10})$/. This regular expression allows for variations like starting with '0', '+234', '234', or without any prefix, followed by exactly 10 digits.
+
+If the phone number format is valid, we use substr() to extract the last 10 digits of the phone number.
+
+Here's an example of how you can use the function:
+
+$phoneNumber = '+2347086778010';
+
+$result = validateAndExtractPhoneNumber($phoneNumber);
+
+if ($result !== false) {
+    echo "Valid phone number: $result";
+} else {
+    echo "Invalid phone number format";
+}
+
+https://blog.renoki.org/understanding-lockforupdate-and-sharedlock-in-laravel
